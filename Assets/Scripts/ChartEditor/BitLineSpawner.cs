@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BitLineSpawner : MonoBehaviour
 {
+    [Header("프리팹 관련")]
     public GameObject BitLine;
+    public GameObject BitCount;
     
     private float sapcing_16Bit = 1f;
     private float startPosY = -2f;
@@ -42,6 +45,10 @@ public class BitLineSpawner : MonoBehaviour
             {
                 // 1마디는 하늘색
                 line.GetComponent<SpriteRenderer>().color = Color.cyan;
+
+                var lineCount = Instantiate(BitCount, pos + new Vector2(-3, 0), Quaternion.identity);
+                lineCount.transform.SetParent(this.transform);
+                lineCount.GetComponent<TextMeshPro>().text = (i / 16).ToString();
             }
             
             line.transform.SetParent(this.transform);
