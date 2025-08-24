@@ -11,6 +11,8 @@ public class CameraControl : MonoBehaviour
     public float scrollSpeed = 5f;
     public float smoothTime = 0.2f;
 
+    private const float CameraMinPosY = 0;
+
     private void Start()
     {
         mainCamera = Camera.main;
@@ -20,19 +22,13 @@ public class CameraControl : MonoBehaviour
     private void Update()
     {
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        // if (wheelInput > 0)
-        // {
-        //     // 휠을 올렸을 때
-        //     
-        // }
-        // else if (wheelInput < 0)
-        // {
-        //     // 휠을 내렸을 때
-        // }
         if (wheelInput != 0f)
         {
             // 목표 위치 갱신
             targetPosition += new Vector3(0, wheelInput * scrollSpeed, 0);
+            
+            targetPosition.y = Mathf.Clamp(targetPosition.y, 0f, 
+                (EditorManager.Instance.bitLineSpawner.startBitCount + EditorManager.Instance.bitLineSpawner.extraBitCount) * 16);
         }
 
         // 부드럽게 이동

@@ -10,8 +10,11 @@ public class BitLineSpawner : MonoBehaviour
     public GameObject BitLine;
     public GameObject BitCount;
     
+    [Header("각종 수치들 관련")]
     private float sapcing_16Bit = 1f;
     private float startPosY = -2f;
+    public int startBitCount = 3;
+    public int extraBitCount = 0;
 
     private const int Num16BitLines = 16;
 
@@ -24,7 +27,7 @@ public class BitLineSpawner : MonoBehaviour
 
     private void Spawn16BitLines(int amount)
     {
-        for (int i = 0; i < Num16BitLines * amount; i++)
+        for (int i = 0; i <= Num16BitLines * amount; i++)
         {
             var pos = new Vector2(0, startPosY + i);
             var line = Instantiate(BitLine, pos, Quaternion.identity);
